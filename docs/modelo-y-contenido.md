@@ -27,7 +27,7 @@ Ayudar a futuros alumnos a explorar posibles direcciones profesionales en IA/Tec
 | `rock` | Rock The AI Code | [Programa](https://thepower.education/thepowermba/tech/rock-the-code) | [Dossier](https://thepower.education/forms/rtc-es-mql-pdf?previoussource=) | [Hablar con un orientador académico](https://powercalendar.tools.thepower.education/orientacion?programId=rock-the-ai-code) | No se presenta como Intensive; queda fuera cuando la titulación es prioritaria |
 | `agentic` | AI Agentic Developer | [Programa](https://thepower.education/thepowermba/tech/ai-agentic-developer) | [Dossier](https://thepower.education/forms/datp-es-desarrollador-agentico-mql-dossier?previoussource=) | [Hablar con un orientador académico](https://powercalendar.tools.thepower.education/orientacion?programId=intensive-agentic-ai-developer) | Intensive Master - Agentic AI Developer + Programa Universitario |
 | `engineer` | AI Engineer | [Programa](https://thepower.education/thepowermba/tech/ai-engineer) | [Dossier](https://thepower.education/forms/tpie-es-aiengineer-mql-dossier?previoussource=) | [Hablar con un orientador académico](https://powercalendar.tools.thepower.education/orientacion?programId=intensive-ai-engineer) | Intensive AI Engineer + Programa Universitario |
-| `data` | AI Data Analytics | [Programa](https://thepower.education/thepowermba/tech/data-analytics) | [Dossier](https://thepower.education/forms/tpda-es-mql-dossier?previoussource=) | [Hablar con un orientador académico](https://powercalendar.tools.thepower.education/orientacion?programId=intensive-ai-data-analytics) | Intensive Master - AI Data Analytics + Programa Universitario |
+| `data` | Máster en AI Data Analytics | [Programa](https://thepower.education/thepowermba/tech/data-analytics) | [Dossier](https://thepower.education/forms/tpda-es-mql-dossier?previoussource=) | [Hablar con un orientador académico](https://powercalendar.tools.thepower.education/orientacion?programId=intensive-ai-data-analytics) | No se ofrece como ruta con Programa Universitario en este orientador |
 
 Power BI no es una ruta independiente del orientador. La descripción de AI Data Analytics incluye caminos de Business Intelligence o Analytics Engineering.
 
@@ -43,7 +43,7 @@ La segunda ruta solo se muestra cuando su puntuación queda suficientemente cerc
 
 Responder “Sí” aplica dos cambios:
 
-1. El ranking solo considera rutas Intensive con `universityLabel`.
+1. El ranking solo considera rutas Intensive con `universityLabel`. AI Data Analytics queda fuera de este filtro porque no es un programa Intensive con la opción indicada en esta evaluación.
 2. El resultado muestra el nombre combinado, por ejemplo **Intensive Makers + Programa Universitario**, y explica que la ruta permite añadir esa opción.
 
 Responder “No” deja disponible todo el catálogo de rutas y no añade la titulación al nombre recomendado.
