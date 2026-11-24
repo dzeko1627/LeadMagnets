@@ -162,7 +162,7 @@
           <p id="tp-result-desc"></p>
           <div class="tp-reason"><strong>Por qué encaja contigo</strong><p id="tp-result-reason"></p></div>
           <div class="tp-reason tp-alternative" id="tp-alt-wrap" hidden><strong>Otra ruta que podrías valorar</strong><p id="tp-result-alt"></p></div>
-          <div class="tp-result-actions"><a class="tp-button" id="tp-program-cta" target="_blank" rel="noopener">Ver el programa →</a><a class="tp-button secondary" id="tp-dossier-cta" target="_blank" rel="noopener">Descargar dossier →</a><a class="tp-button secondary" id="tp-booking-cta" target="_blank" rel="noopener" hidden>Hablar con un orientador académico →</a><button class="tp-button secondary" id="tp-restart" type="button">Hacer otra orientación</button></div>
+          <div class="tp-result-actions"><a class="tp-button" id="tp-program-cta" target="_blank" rel="noopener">Ver el programa →</a><a class="tp-button secondary" id="tp-dossier-cta" target="_blank" rel="noopener">Descargar dossier →</a><a class="tp-button secondary" id="tp-booking-cta" target="_blank" rel="noopener" hidden>Hablar con un orientador académico →</a></div>
           <label class="tp-consent"><input type="checkbox" id="tp-email-consent"><span>Quiero recibir por email mi resumen personalizado y novedades relacionadas. Puedo darme de baja cuando quiera.</span></label>
           <div class="tp-email-wrap" id="tp-email-wrap" hidden><label for="tp-email">Email para enviarte el resumen</label><input class="tp-email" id="tp-email" type="email" autocomplete="email" placeholder="tu@email.com"></div>
         </div>
@@ -369,9 +369,6 @@
         else showResult();
       });
       root.querySelector('#tp-back').addEventListener('click', () => { if (step > 0) { step -= 1; renderQuestion(); saveState(); } });
-      root.querySelector('#tp-restart').addEventListener('click', () => {
-        answers.fill(null); step=0; openAnswer.value=''; result.style.display='none'; intro.style.display='grid'; introDetails.style.display='block'; saveState();
-      });
       openAnswer.addEventListener('input', () => { answers[step] = openAnswer.value; saveState(); });
       root.querySelector('#tp-email-consent').addEventListener('change', event => { root.querySelector('#tp-email-wrap').hidden = !event.target.checked; });
       const saved = window.openai && window.openai.widgetState;
