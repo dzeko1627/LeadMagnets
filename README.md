@@ -1,6 +1,6 @@
 # Orientador de programas de IA · thePower
 
-Prototipo interactivo para ayudar a una persona a encontrar el programa de tecnología e IA que mejor encaja con sus objetivos, experiencia y preferencias de aprendizaje. Está planteado como una experiencia de captación de leads: ofrece una orientación personalizada y, al final, permite consultar el programa, pedir su dossier o reservar una conversación informativa.
+Prototipo interactivo para ayudar a una persona a explorar hacia dónde llevar su futuro profesional en tecnología e IA, según sus objetivos, experiencia y preferencias de aprendizaje. Al final ofrece una posible ruta formativa y permite consultar el programa, pedir su dossier o reservar una conversación informativa.
 
 ## Ejecutar en local
 
