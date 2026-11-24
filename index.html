@@ -112,9 +112,9 @@
     <main class="tp-main">
       <section class="tp-intro" id="tp-intro">
         <div>
-          <div class="tp-eyebrow">Tu siguiente paso en tecnología</div>
-          <h1>Encuentra el programa que encaja contigo</h1>
-          <p class="tp-lead">No hace falta que sepas qué programa elegir. Queremos entender qué te gustaría conseguir, qué has hecho hasta ahora y qué espacio tienes para formarte.</p>
+          <div class="tp-eyebrow">Tu próximo paso en tecnología</div>
+          <h1>¿Hacia dónde quieres llevar tu futuro profesional?</h1>
+          <p class="tp-lead">Explora qué tipo de retos y proyectos conectan con tus intereses, tu experiencia y la forma en la que quieres avanzar. Después te mostraremos una dirección posible para dar el siguiente paso.</p>
           <div class="tp-paths" aria-label="Rutas disponibles">
             <span class="tp-path">Objetivos</span><span class="tp-path">Experiencia</span><span class="tp-path">Preferencias</span><span class="tp-path">Próximo paso</span>
           </div>
@@ -131,7 +131,7 @@
       <div id="tp-intro-details">
         <hr class="tp-rule">
         <div class="tp-trust"><span>Recomendación basada en tu objetivo</span><span>Considera experiencia y formato</span><span>Sin compromiso</span></div>
-        <p class="tp-footnote">No te pediremos que elijas entre programas: la recomendación se construye a partir de tu situación y tus respuestas.</p>
+        <p class="tp-footnote">No necesitas tener un camino decidido: la idea es ayudarte a identificar en qué dirección podrías avanzar.</p>
       </div>
       <section class="tp-quiz" id="tp-quiz" aria-live="polite">
         <div class="tp-progress-head"><span id="tp-step-label">Pregunta 1 de 8</span><span id="tp-time-label">~7 min restantes</span></div>
@@ -154,7 +154,7 @@
       </section>
       <section class="tp-result" id="tp-result" aria-live="polite">
         <div class="tp-result-top"><span class="tp-result-mark" aria-hidden="true">✓</span> Tu orientación está lista</div>
-        <h2 id="tp-result-title">Tu mejor punto de partida</h2>
+        <h2 id="tp-result-title">Tu posible rumbo profesional</h2>
         <p class="tp-question-sub" id="tp-result-sub"></p>
         <div class="tp-result-panel">
           <div class="tp-result-program" id="tp-result-program"></div>
@@ -341,8 +341,8 @@
         const objective = clean(answers[0]);
         const challenge = clean(answers[1]);
         root.querySelector('#tp-result-name').textContent = wantsUniversity ? p.universityLabel : p.name;
-        root.querySelector('#tp-result-program').textContent = 'Ruta recomendada';
-        root.querySelector('#tp-result-sub').textContent = wantsUniversity ? 'Una recomendación basada en lo que buscas y tu interés por la titulación universitaria.' : 'Una recomendación basada en lo que quieres conseguir y cómo prefieres aprender.';
+        root.querySelector('#tp-result-program').textContent = 'Una ruta para explorar';
+        root.querySelector('#tp-result-sub').textContent = wantsUniversity ? 'Una orientación basada en lo que buscas y tu interés por la titulación universitaria.' : 'Una orientación basada en lo que quieres conseguir y cómo prefieres aprender.';
         root.querySelector('#tp-result-desc').textContent = p.desc;
         const signals = [objective ? `tu objetivo ${shortQuote(objective)}` : '', challenge ? `el caso que planteas ${shortQuote(challenge)}` : ''].filter(Boolean);
         let why = signals.length ? `${signals.join(' y ')} ${signals.length > 1 ? 'encajan' : 'encaja'} con ${p.name}.` : `Por tu prioridad (${priority.toLowerCase()}), te recomendamos ${p.name}.`;
