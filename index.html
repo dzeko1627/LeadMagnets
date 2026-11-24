@@ -74,11 +74,6 @@
     #thepower-orientador .tp-result-panel { background: var(--tp-surface); border: 1px solid var(--tp-line); border-radius: 16px; margin-top: 20px; padding: 21px; }
     #thepower-orientador .tp-result-program { color: var(--tp-green); font-size: 12px; font-weight: 700; letter-spacing: .08em; margin-bottom: 8px; text-transform: uppercase; }
     #thepower-orientador .tp-result-panel p { color: var(--tp-muted); }
-    #thepower-orientador .tp-evidence { display: grid; gap: 10px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 20px; }
-    #thepower-orientador .tp-evidence-card { background: var(--tp-bg); border: 1px solid var(--tp-line); border-radius: 12px; padding: 14px; }
-    #thepower-orientador .tp-evidence-card span { color: var(--tp-green); display: block; font-size: 10px; font-weight: 750; letter-spacing: .08em; margin-bottom: 7px; text-transform: uppercase; }
-    #thepower-orientador .tp-evidence-card strong { color: var(--tp-ink); display: block; font-size: 13px; margin-bottom: 5px; }
-    #thepower-orientador .tp-evidence-card p { color: var(--tp-muted); font-size: 12px; }
     #thepower-orientador .tp-reason { border-left: 2px solid var(--tp-green); margin-top: 18px; padding-left: 14px; }
     #thepower-orientador .tp-reason strong { color: var(--tp-ink); display: block; font-size: 13px; margin-bottom: 5px; }
     #thepower-orientador .tp-alternative { margin-top: 15px; }
@@ -102,7 +97,6 @@
       #thepower-orientador .tp-time strong { font-size: 25px; }
       #thepower-orientador .tp-timebox .tp-small { max-width: 180px; }
       #thepower-orientador .tp-question-wrap { margin-top: 24px; }
-      #thepower-orientador .tp-evidence { grid-template-columns: 1fr; }
       #thepower-orientador .tp-result-actions { align-items: stretch; flex-direction: column; }
       #thepower-orientador .tp-result-actions .tp-button { width: 100%; }
     }
@@ -166,14 +160,9 @@
           <div class="tp-result-program" id="tp-result-program"></div>
           <h2 id="tp-result-name"></h2>
           <p id="tp-result-desc"></p>
-          <div class="tp-evidence" aria-label="Señales que hemos tenido en cuenta">
-            <article class="tp-evidence-card"><span>Tu prioridad</span><strong id="tp-evidence-goal-title"></strong><p id="tp-evidence-goal"></p></article>
-            <article class="tp-evidence-card"><span>Tu forma de abordar retos</span><strong id="tp-evidence-approach-title"></strong><p id="tp-evidence-approach"></p></article>
-            <article class="tp-evidence-card"><span>Tu punto de partida</span><strong id="tp-evidence-start-title"></strong><p id="tp-evidence-start"></p></article>
-          </div>
-          <div class="tp-reason"><strong>Cómo se conectan estas señales con la ruta</strong><p id="tp-result-reason"></p></div>
+          <div class="tp-reason"><strong>Por qué encaja contigo</strong><p id="tp-result-reason"></p></div>
           <div class="tp-reason tp-alternative" id="tp-alt-wrap" hidden><strong>Otra ruta que podrías valorar</strong><p id="tp-result-alt"></p></div>
-          <div class="tp-result-actions"><a class="tp-button" id="tp-program-cta" target="_blank" rel="noopener">Ver el programa →</a><a class="tp-button secondary" id="tp-dossier-cta" target="_blank" rel="noopener">Descargar dossier →</a><a class="tp-button secondary" id="tp-booking-cta" target="_blank" rel="noopener" hidden>Pedir cita en PowerCalendar →</a><button class="tp-button secondary" id="tp-restart" type="button">Hacer otra orientación</button></div>
+          <div class="tp-result-actions"><a class="tp-button" id="tp-program-cta" target="_blank" rel="noopener">Ver el programa →</a><a class="tp-button secondary" id="tp-dossier-cta" target="_blank" rel="noopener">Descargar dossier →</a><a class="tp-button secondary" id="tp-booking-cta" target="_blank" rel="noopener" hidden>Hablar con un orientador académico →</a><button class="tp-button secondary" id="tp-restart" type="button">Hacer otra orientación</button></div>
           <label class="tp-consent"><input type="checkbox" id="tp-email-consent"><span>Quiero recibir por email mi resumen personalizado y novedades relacionadas. Puedo darme de baja cuando quiera.</span></label>
           <div class="tp-email-wrap" id="tp-email-wrap" hidden><label for="tp-email">Email para enviarte el resumen</label><input class="tp-email" id="tp-email" type="email" autocomplete="email" placeholder="tu@email.com"></div>
         </div>
@@ -346,35 +335,21 @@
         const p = programs[primary];
         const s = secondary ? programs[secondary] : null;
         const clean = value => typeof value === 'string' ? value.trim() : '';
-        const shortQuote = value => { const text = clean(value); return text ? `“${text.slice(0, 120)}${text.length > 120 ? '…' : ''}”` : ''; };
+        const shortQuote = value => { const text = clean(value); return text ? `“${text.slice(0, 88)}${text.length > 88 ? '…' : ''}”` : ''; };
         const priority = questions[3].options[answers[3]]?.label || '';
-        const approach = questions[6].options[answers[6]]?.label || '';
-        const experience = questions[5].options[answers[5]]?.label || 'tu punto de partida';
         const learning = questions[7].options[answers[7]]?.label || '';
-        const time = questions[8].options[answers[8]]?.label || '';
-        const activities = Array.isArray(answers[4]) ? answers[4].map(index => questions[4].options[index]?.label).filter(Boolean) : [];
         const objective = clean(answers[0]);
         const challenge = clean(answers[1]);
-        const proof = clean(answers[9]);
         root.querySelector('#tp-result-name').textContent = wantsUniversity ? p.universityLabel : p.name;
         root.querySelector('#tp-result-program').textContent = 'Ruta recomendada';
         root.querySelector('#tp-result-sub').textContent = wantsUniversity ? 'La recomendación recoge tus objetivos, el reto que planteas, tu experiencia y tus preferencias, incluida la opción de sumar una titulación universitaria.' : 'La recomendación recoge tus objetivos, el reto que planteas, tu experiencia y las condiciones en las que quieres formarte.';
         root.querySelector('#tp-result-desc').textContent = p.desc;
-        root.querySelector('#tp-evidence-goal-title').textContent = priority || 'El resultado que buscas';
-        root.querySelector('#tp-evidence-goal').textContent = objective ? `En tu objetivo a un año: ${shortQuote(objective)}${challenge ? ` El caso que quieres abordar es ${shortQuote(challenge)}.` : ''}` : challenge ? `El reto que quieres abordar es ${shortQuote(challenge)}.` : 'Hemos usado el cambio que has priorizado para orientar la recomendación.';
-        root.querySelector('#tp-evidence-approach-title').textContent = approach || 'Tu estilo de trabajo';
-        root.querySelector('#tp-evidence-approach').textContent = activities.length ? `También has tenido contacto con ${activities.slice(0, 2).join(' y ').toLowerCase()}${activities.length > 2 ? ` y ${activities.length - 2} actividad${activities.length > 2 ? 'es' : ''} más` : ''}.` : 'Tu preferencia nos ayuda a distinguir qué tipo de proyecto puede mantener tu interés.';
-        root.querySelector('#tp-evidence-start-title').textContent = experience;
-        root.querySelector('#tp-evidence-start').textContent = [learning ? `Te ayuda avanzar con: ${learning.toLowerCase()}.` : '', time ? `Tiempo disponible: ${time.toLowerCase()}.` : '', wantsUniversity ? 'También es importante para ti sumar una titulación universitaria.' : '', proof ? `Al terminar quieres poder enseñar ${shortQuote(proof)}.` : ''].filter(Boolean).join(' ');
-        let why = `${priority ? `Has puesto el foco en ${priority.toLowerCase()}` : 'Tu prioridad profesional'} y te atrae ${approach ? approach.toLowerCase() : 'el tipo de retos de esta ruta'}. ${p.fit}`;
-        if (challenge) why += ` El ejemplo que describes —${shortQuote(challenge)}— da contexto a esa elección.`;
-        why += ` Hemos contrastado ese objetivo con tu experiencia (${experience.toLowerCase()})`;
-        if (learning) why += `, tu preferencia por ${learning.toLowerCase()}`;
-        if (time) why += ` y el tiempo que puedes reservar (${time.toLowerCase()})`;
-        why += '. Así la sugerencia conecta lo que quieres conseguir con el tipo de trabajo y el ritmo de aprendizaje del programa.';
+        let why = objective ? `Tu objetivo ${shortQuote(objective)}` : `Tu prioridad es ${priority.toLowerCase()}`;
+        if (challenge) why += ` y el caso concreto ${shortQuote(challenge)}`;
+        why += ' orientan la recomendación hacia esta ruta.';
+        if (learning) why += ` El formato que prefieres (${learning.toLowerCase()}) también encaja.`;
         if ((primary === 'engineer' || primary === 'agentic') && levelCode !== 'coding' && levelCode !== 'production') why += ' Antes de matricularte, conviene confirmar los requisitos técnicos de entrada con el equipo académico.';
-        if (wantsUniversity) why += ' Como has indicado que la titulación universitaria es importante para ti, hemos priorizado esta ruta Intensive, que permite añadirla al programa.';
-        if (proof) why += ` El resultado que quieres demostrar es ${shortQuote(proof)}.`;
+        if (wantsUniversity) why += ' Puedes añadir una titulación universitaria a este programa Intensive.';
         root.querySelector('#tp-result-reason').textContent = why;
         root.querySelector('#tp-program-cta').href = p.link;
         root.querySelector('#tp-dossier-cta').href = p.dossier;
