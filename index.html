@@ -81,12 +81,6 @@
     #thepower-orientador .tp-result-actions .tp-button { align-items: center; display: inline-flex; justify-content: center; text-decoration: none; }
     #thepower-orientador .tp-result-actions .tp-button[hidden] { display: none; }
     #thepower-orientador .tp-note { color: var(--tp-muted); font-size: 12px; margin-top: 12px !important; }
-    #thepower-orientador .tp-consent { align-items: flex-start; color: var(--tp-muted); display: flex; font-size: 12px; gap: 8px; margin-top: 16px; }
-    #thepower-orientador .tp-consent input { accent-color: var(--tp-green); margin-top: 3px; }
-    #thepower-orientador .tp-email-wrap { margin: 10px 0 0 23px; max-width: 390px; }
-    #thepower-orientador .tp-email-wrap label { color: var(--tp-muted); display: block; font-size: 12px; margin-bottom: 5px; }
-    #thepower-orientador .tp-email { background: var(--tp-surface); border: 1px solid var(--tp-line); border-radius: 9px; color: var(--tp-ink); font: inherit; min-height: 42px; padding: 9px 11px; width: 100%; }
-    #thepower-orientador .tp-email:focus { border-color: var(--tp-green); outline: 2px solid color-mix(in srgb, var(--tp-green) 25%, transparent); }
     @media (max-width: 620px) {
       #thepower-orientador .tp-topbar { padding: 7px 16px; }
       #thepower-orientador .tp-logo { height: 36px; width: 150px; }
@@ -163,8 +157,6 @@
           <div class="tp-reason"><strong>Por qué encaja contigo</strong><p id="tp-result-reason"></p></div>
           <div class="tp-reason tp-alternative" id="tp-alt-wrap" hidden><strong>Otra ruta que podrías valorar</strong><p id="tp-result-alt"></p></div>
           <div class="tp-result-actions"><a class="tp-button" id="tp-program-cta" target="_blank" rel="noopener">Ver el programa →</a><a class="tp-button secondary" id="tp-dossier-cta" target="_blank" rel="noopener">Descargar dossier →</a><a class="tp-button secondary" id="tp-booking-cta" target="_blank" rel="noopener" hidden>Hablar con un orientador académico →</a></div>
-          <label class="tp-consent"><input type="checkbox" id="tp-email-consent"><span>Quiero recibir por email mi resumen personalizado y novedades relacionadas. Puedo darme de baja cuando quiera.</span></label>
-          <div class="tp-email-wrap" id="tp-email-wrap" hidden><label for="tp-email">Email para enviarte el resumen</label><input class="tp-email" id="tp-email" type="email" autocomplete="email" placeholder="tu@email.com"></div>
         </div>
       </section>
     </main>
@@ -236,7 +228,7 @@
         rock:{name:'Rock The AI Code', desc:'Para aprender a desarrollar productos digitales full stack con IA como copiloto y construir un portfolio de proyectos.', link:'https://thepower.education/thepowermba/tech/rock-the-code', dossier:'https://thepower.education/forms/rtc-es-mql-pdf?previoussource=', appointment:'https://powercalendar.tools.thepower.education/orientacion?programId=rock-the-ai-code', fit:'Encaja con el interés por transformar una idea en un producto digital completo y aprender a desarrollar guiando a la IA.'},
         agentic:{name:'AI Agentic Developer', universityLabel:'Intensive Master - Agentic AI Developer + Programa Universitario', desc:'Para construir y desplegar sistemas agénticos, con una base técnica que permita trabajar con código y herramientas de desarrollo.', link:'https://thepower.education/thepowermba/tech/ai-agentic-developer', dossier:'https://thepower.education/forms/datp-es-desarrollador-agentico-mql-dossier?previoussource=', appointment:'https://powercalendar.tools.thepower.education/orientacion?programId=intensive-agentic-ai-developer', fit:'Se centra en diseñar cómo colaboran los agentes, conectarlos con herramientas y desplegar flujos que puedan operar con trazabilidad.'},
         engineer:{name:'AI Engineer', universityLabel:'Intensive AI Engineer + Programa Universitario', desc:'Para profundizar en el diseño e integración de sistemas de IA preparados para funcionar en producción.', link:'https://thepower.education/thepowermba/tech/ai-engineer', dossier:'https://thepower.education/forms/tpie-es-aiengineer-mql-dossier?previoussource=', appointment:'https://powercalendar.tools.thepower.education/orientacion?programId=intensive-ai-engineer', fit:'Profundiza en arquitectura, evaluación, integración y operación de sistemas de IA fiables en producción.'},
-        data:{name:'AI Data Analytics', universityLabel:'Intensive Master - AI Data Analytics + Programa Universitario', desc:'Para convertir datos en decisiones y elegir después entre una ruta de Business Intelligence o Analytics Engineering.', link:'https://thepower.education/thepowermba/tech/data-analytics', dossier:'https://thepower.education/forms/tpda-es-mql-dossier?previoussource=', appointment:'https://powercalendar.tools.thepower.education/orientacion?programId=intensive-ai-data-analytics', fit:'Parte de preguntas y datos reales para construir análisis que ayuden a explicar patrones y orientar decisiones.'}
+        data:{name:'Máster en AI Data Analytics', desc:'Para convertir datos en decisiones y elegir después entre una ruta de Business Intelligence o Analytics Engineering.', link:'https://thepower.education/thepowermba/tech/data-analytics', dossier:'https://thepower.education/forms/tpda-es-mql-dossier?previoussource=', appointment:'https://powercalendar.tools.thepower.education/orientacion?programId=intensive-ai-data-analytics', fit:'Parte de preguntas y datos reales para construir análisis que ayuden a explicar patrones y orientar decisiones.'}
       };
       const intro = root.querySelector('#tp-intro');
       const introDetails = root.querySelector('#tp-intro-details');
@@ -377,7 +369,6 @@
       });
       root.querySelector('#tp-back').addEventListener('click', () => { if (step > 0) { step -= 1; renderQuestion(); saveState(); } });
       openAnswer.addEventListener('input', () => { answers[step] = openAnswer.value; saveState(); });
-      root.querySelector('#tp-email-consent').addEventListener('change', event => { root.querySelector('#tp-email-wrap').hidden = !event.target.checked; });
       const saved = window.openai && window.openai.widgetState;
       if (saved && saved.modelContent && saved.modelContent.version === 5 && Array.isArray(saved.modelContent.answers)) {
         saved.modelContent.answers.forEach((answer,index) => { if (index < questions.length && !questions[index].open) answers[index] = answer; });
