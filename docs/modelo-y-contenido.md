@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Orientar a futuros alumnos hacia un programa de IA/Tech adecuado a lo que quieren conseguir, su experiencia y la forma en la que prefieren estudiar. La evaluación dura alrededor de 9 minutos y tiene 11 preguntas; las dos respuestas abiertas pueden alargarla hasta unos 10 minutos.
+Ayudar a futuros alumnos a explorar posibles direcciones profesionales en IA/Tech según sus objetivos, experiencia y preferencias de aprendizaje. Al final se sugiere una ruta formativa como posible siguiente paso. La evaluación dura alrededor de 9 minutos y tiene 11 preguntas; las dos respuestas abiertas pueden alargarla hasta unos 10 minutos.
 
 ## Cuestionario
 
