@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><title>Orientador Tech thePower</title><style>html,body{margin:0;min-height:100%;background:#eef2ee}body{padding:16px;box-sizing:border-box}@media(max-width:620px){body{padding:6px}}</style></head><body><div id="thepower-orientador">
+  <style>
+    #thepower-orientador {
+      --tp-ink: light-dark(#17221d, #edf3ef);
+      --tp-muted: light-dark(#637169, #aab8b0);
+      --tp-bg: light-dark(#f3f6f2, #111714);
+      --tp-surface: light-dark(#ffffff, #1a221e);
+      --tp-line: light-dark(#dce5dd, #34413a);
+      --tp-green: light-dark(#08784e, #70d6a4);
+      --tp-green-soft: light-dark(#e6f4ec, #203b2d);
+      --tp-orange: light-dark(#bd5d32, #f0a276);
+      color: var(--tp-ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+      width: 100%;
+    }
+    #thepower-orientador * { box-sizing: border-box; }
+    #thepower-orientador .tp-window { background: var(--tp-bg); border: 1px solid var(--tp-line); border-radius: 20px; overflow: hidden; }
+    #thepower-orientador .tp-topbar { align-items: center; background: #fff; border-bottom: 1px solid var(--tp-line); display: flex; justify-content: space-between; min-height: 66px; padding: 8px 24px; }
+    #thepower-orientador .tp-brand { align-items: center; display: flex; }
+    #thepower-orientador .tp-logo { display: block; height: 42px; object-fit: contain; object-position: left center; width: 176px; }
+    #thepower-orientador .tp-topmeta { color: #637169; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+    #thepower-orientador .tp-main { margin: 0 auto; max-width: 760px; padding: 36px 28px 42px; }
+    #thepower-orientador .tp-intro { display: grid; gap: 28px; grid-template-columns: minmax(0, 1.2fr) minmax(190px, .8fr); }
+    #thepower-orientador .tp-eyebrow { color: var(--tp-green); font-size: 11px; font-weight: 700; letter-spacing: .12em; margin-bottom: 10px; text-transform: uppercase; }
+    #thepower-orientador h1 { font-size: clamp(28px, 5vw, 42px); letter-spacing: -.055em; line-height: 1.07; margin: 0 0 14px; max-width: 520px; }
+    #thepower-orientador h2 { font-size: 23px; letter-spacing: -.035em; line-height: 1.2; margin: 0 0 9px; }
+    #thepower-orientador h3 { font-size: 16px; letter-spacing: -.02em; margin: 0 0 6px; }
+    #thepower-orientador p { margin: 0; }
+    #thepower-orientador .tp-lead { color: var(--tp-muted); font-size: 16px; max-width: 510px; }
+    #thepower-orientador .tp-timebox { align-self: center; background: var(--tp-surface); border: 1px solid var(--tp-line); border-radius: 16px; padding: 19px; }
+    #thepower-orientador .tp-time { align-items: baseline; display: flex; gap: 8px; margin-bottom: 10px; }
+    #thepower-orientador .tp-time strong { color: var(--tp-green); font-size: 31px; letter-spacing: -.06em; }
+    #thepower-orientador .tp-time span { color: var(--tp-muted); font-size: 13px; }
+    #thepower-orientador .tp-small { color: var(--tp-muted); font-size: 12px; }
+    #thepower-orientador .tp-paths { display: flex; flex-wrap: wrap; gap: 7px; margin: 22px 0 25px; }
+    #thepower-orientador .tp-path { background: var(--tp-green-soft); border-radius: 999px; color: var(--tp-green); font-size: 12px; font-weight: 600; padding: 6px 10px; }
+    #thepower-orientador .tp-button { appearance: none; background: var(--tp-green); border: 1px solid var(--tp-green); border-radius: 10px; color: #fff; cursor: pointer; font: inherit; font-weight: 650; min-height: 46px; padding: 0 17px; transition: transform .15s ease, filter .15s ease; }
+    #thepower-orientador .tp-button:hover { filter: brightness(1.06); transform: translateY(-1px); }
+    #thepower-orientador .tp-button.secondary { background: transparent; color: var(--tp-ink); border-color: var(--tp-line); }
+    #thepower-orientador .tp-linkbutton { appearance: none; background: none; border: 0; color: var(--tp-muted); cursor: pointer; font: inherit; padding: 10px 4px; text-decoration: underline; text-underline-offset: 3px; }
+    #thepower-orientador .tp-intro-foot { align-items: center; display: flex; flex-wrap: wrap; gap: 15px; }
+    #thepower-orientador .tp-footnote { color: var(--tp-muted); font-size: 12px; margin-top: 20px; }
+    #thepower-orientador .tp-rule { border: 0; border-top: 1px solid var(--tp-line); margin: 30px 0 20px; }
+    #thepower-orientador .tp-trust { color: var(--tp-muted); display: flex; flex-wrap: wrap; font-size: 12px; gap: 18px; }
+    #thepower-orientador .tp-trust span::before { color: var(--tp-green); content: "✓"; font-weight: 800; margin-right: 6px; }
+    #thepower-orientador .tp-quiz { display: none; }
+    #thepower-orientador .tp-progress-head { align-items: center; color: var(--tp-muted); display: flex; font-size: 12px; justify-content: space-between; margin: 0 0 9px; }
+    #thepower-orientador .tp-progress { background: var(--tp-line); border-radius: 999px; height: 6px; overflow: hidden; }
+    #thepower-orientador .tp-progress > span { background: var(--tp-green); border-radius: inherit; display: block; height: 100%; transition: width .25s ease; width: 12.5%; }
+    #thepower-orientador .tp-question-wrap { margin: 30px auto 0; max-width: 650px; }
+    #thepower-orientador .tp-question-type { color: var(--tp-green); font-size: 11px; font-weight: 700; letter-spacing: .11em; margin-bottom: 9px; text-transform: uppercase; }
+    #thepower-orientador .tp-question-sub { color: var(--tp-muted); margin: 0 0 20px; }
+    #thepower-orientador .tp-options { display: grid; gap: 9px; }
+    #thepower-orientador .tp-option { align-items: flex-start; appearance: none; background: var(--tp-surface); border: 1px solid var(--tp-line); border-radius: 12px; color: var(--tp-ink); cursor: pointer; display: flex; font: inherit; gap: 12px; min-height: 58px; padding: 13px 15px; text-align: left; width: 100%; }
+    #thepower-orientador .tp-option:hover { border-color: var(--tp-green); }
+    #thepower-orientador .tp-option[aria-pressed="true"] { background: var(--tp-green-soft); border-color: var(--tp-green); box-shadow: inset 0 0 0 1px var(--tp-green); }
+    #thepower-orientador .tp-radio { border: 1.5px solid var(--tp-muted); border-radius: 50%; flex: 0 0 17px; height: 17px; margin-top: 2px; }
+    #thepower-orientador .tp-option.is-multi .tp-radio { border-radius: 4px; }
+    #thepower-orientador .tp-option[aria-pressed="true"] .tp-radio { background: var(--tp-green); border-color: var(--tp-green); box-shadow: inset 0 0 0 4px var(--tp-surface); }
+    #thepower-orientador .tp-option-copy { display: grid; gap: 2px; }
+    #thepower-orientador .tp-option-copy small { color: var(--tp-muted); font-size: 12px; }
+    #thepower-orientador .tp-textarea { background: var(--tp-surface); border: 1px solid var(--tp-line); border-radius: 12px; color: var(--tp-ink); display: block; font: inherit; min-height: 124px; padding: 14px; resize: vertical; width: 100%; }
+    #thepower-orientador #tp-open-wrap { margin-top: 8px; }
+    #thepower-orientador #tp-open-label { display: block; margin-bottom: 10px; }
+    #thepower-orientador .tp-textarea:focus { border-color: var(--tp-green); outline: 2px solid color-mix(in srgb, var(--tp-green) 25%, transparent); }
+    #thepower-orientador .tp-quiz-actions { align-items: center; display: flex; justify-content: space-between; margin-top: 23px; }
+    #thepower-orientador .tp-next[disabled] { cursor: not-allowed; filter: grayscale(.4); opacity: .52; transform: none; }
+    #thepower-orientador .tp-result { display: none; }
+    #thepower-orientador .tp-result-top { align-items: center; color: var(--tp-green); display: flex; font-size: 12px; font-weight: 700; gap: 8px; letter-spacing: .09em; margin-bottom: 10px; text-transform: uppercase; }
+    #thepower-orientador .tp-result-mark { align-items: center; background: var(--tp-green-soft); border-radius: 50%; display: inline-flex; height: 28px; justify-content: center; letter-spacing: 0; width: 28px; }
+    #thepower-orientador .tp-result-panel { background: var(--tp-surface); border: 1px solid var(--tp-line); border-radius: 16px; margin-top: 20px; padding: 21px; }
+    #thepower-orientador .tp-result-program { color: var(--tp-green); font-size: 12px; font-weight: 700; letter-spacing: .08em; margin-bottom: 8px; text-transform: uppercase; }
+    #thepower-orientador .tp-result-panel p { color: var(--tp-muted); }
+    #thepower-orientador .tp-evidence { display: grid; gap: 10px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 20px; }
+    #thepower-orientador .tp-evidence-card { background: var(--tp-bg); border: 1px solid var(--tp-line); border-radius: 12px; padding: 14px; }
+    #thepower-orientador .tp-evidence-card span { color: var(--tp-green); display: block; font-size: 10px; font-weight: 750; letter-spacing: .08em; margin-bottom: 7px; text-transform: uppercase; }
+    #thepower-orientador .tp-evidence-card strong { color: var(--tp-ink); display: block; font-size: 13px; margin-bottom: 5px; }
+    #thepower-orientador .tp-evidence-card p { color: var(--tp-muted); font-size: 12px; }
+    #thepower-orientador .tp-reason { border-left: 2px solid var(--tp-green); margin-top: 18px; padding-left: 14px; }
+    #thepower-orientador .tp-reason strong { color: var(--tp-ink); display: block; font-size: 13px; margin-bottom: 5px; }
+    #thepower-orientador .tp-alternative { margin-top: 15px; }
+    #thepower-orientador .tp-result-actions { align-items: center; display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    #thepower-orientador .tp-result-actions .tp-button { align-items: center; display: inline-flex; justify-content: center; text-decoration: none; }
+    #thepower-orientador .tp-result-actions .tp-button[hidden] { display: none; }
+    #thepower-orientador .tp-note { color: var(--tp-muted); font-size: 12px; margin-top: 12px !important; }
+    #thepower-orientador .tp-consent { align-items: flex-start; color: var(--tp-muted); display: flex; font-size: 12px; gap: 8px; margin-top: 16px; }
+    #thepower-orientador .tp-consent input { accent-color: var(--tp-green); margin-top: 3px; }
+    #thepower-orientador .tp-email-wrap { margin: 10px 0 0 23px; max-width: 390px; }
+    #thepower-orientador .tp-email-wrap label { color: var(--tp-muted); display: block; font-size: 12px; margin-bottom: 5px; }
+    #thepower-orientador .tp-email { background: var(--tp-surface); border: 1px solid var(--tp-line); border-radius: 9px; color: var(--tp-ink); font: inherit; min-height: 42px; padding: 9px 11px; width: 100%; }
+    #thepower-orientador .tp-email:focus { border-color: var(--tp-green); outline: 2px solid color-mix(in srgb, var(--tp-green) 25%, transparent); }
+    @media (max-width: 620px) {
+      #thepower-orientador .tp-topbar { padding: 7px 16px; }
+      #thepower-orientador .tp-logo { height: 36px; width: 150px; }
+      #thepower-orientador .tp-main { padding: 26px 16px 30px; }
+      #thepower-orientador .tp-intro { grid-template-columns: 1fr; gap: 17px; }
+      #thepower-orientador .tp-timebox { align-items: center; display: flex; gap: 14px; padding: 13px 15px; }
+      #thepower-orientador .tp-time { margin: 0; white-space: nowrap; }
+      #thepower-orientador .tp-time strong { font-size: 25px; }
+      #thepower-orientador .tp-timebox .tp-small { max-width: 180px; }
+      #thepower-orientador .tp-question-wrap { margin-top: 24px; }
+      #thepower-orientador .tp-evidence { grid-template-columns: 1fr; }
+      #thepower-orientador .tp-result-actions { align-items: stretch; flex-direction: column; }
+      #thepower-orientador .tp-result-actions .tp-button { width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #thepower-orientador *, #thepower-orientador *::before, #thepower-orientador *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+  <div class="tp-window">
+    <header class="tp-topbar">
+      <div class="tp-brand"><img class="tp-logo" src="data:image/png;base64,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" alt="thePower"></div>
+      <div class="tp-topmeta">Orientador · Tech School</div>
+    </header>
+    <main class="tp-main">
+      <section class="tp-intro" id="tp-intro">
+        <div>
+          <div class="tp-eyebrow">Tu siguiente paso en tecnología</div>
+          <h1>Encuentra el programa que encaja contigo</h1>
+          <p class="tp-lead">No hace falta que sepas qué programa elegir. Queremos entender qué te gustaría conseguir, qué has hecho hasta ahora y qué espacio tienes para formarte.</p>
+          <div class="tp-paths" aria-label="Rutas disponibles">
+            <span class="tp-path">Objetivos</span><span class="tp-path">Experiencia</span><span class="tp-path">Preferencias</span><span class="tp-path">Próximo paso</span>
+          </div>
+          <div class="tp-intro-foot">
+            <button class="tp-button" id="tp-start" type="button">Empezar orientación <span aria-hidden="true">→</span></button>
+            <span class="tp-small">Sin respuestas correctas o incorrectas</span>
+          </div>
+        </div>
+        <aside class="tp-timebox" aria-label="Duración estimada">
+          <div class="tp-time"><strong>9</strong><span>minutos</span></div>
+          <p class="tp-small">11 preguntas breves. Si quieres ampliar tus respuestas, puedes tardar hasta 10 minutos.</p>
+        </aside>
+      </section>
+      <div id="tp-intro-details">
+        <hr class="tp-rule">
+        <div class="tp-trust"><span>Recomendación basada en tu objetivo</span><span>Considera experiencia y formato</span><span>Sin compromiso</span></div>
+        <p class="tp-footnote">No te pediremos que elijas entre programas: la recomendación se construye a partir de tu situación y tus respuestas.</p>
+      </div>
+      <section class="tp-quiz" id="tp-quiz" aria-live="polite">
+        <div class="tp-progress-head"><span id="tp-step-label">Pregunta 1 de 8</span><span id="tp-time-label">~7 min restantes</span></div>
+        <div class="tp-progress" role="progressbar" aria-label="Progreso de la orientación" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0"><span id="tp-progress-bar"></span></div>
+        <div class="tp-question-wrap">
+          <div class="tp-question-type" id="tp-question-type">Objetivo</div>
+          <h2 id="tp-question-title"></h2>
+          <p class="tp-question-sub" id="tp-question-sub"></p>
+          <div class="tp-options" id="tp-options"></div>
+          <div id="tp-open-wrap" hidden>
+            <label class="tp-small" for="tp-open-answer" id="tp-open-label">Tu respuesta nos ayuda a afinar la orientación</label>
+            <textarea class="tp-textarea" id="tp-open-answer" maxlength="700" placeholder="Escribe tu respuesta aquí…"></textarea>
+            <p class="tp-note">No incluyas información confidencial de tu empresa.</p>
+          </div>
+          <div class="tp-quiz-actions">
+            <button class="tp-linkbutton" id="tp-back" type="button">← Anterior</button>
+            <button class="tp-button tp-next" id="tp-next" type="button" disabled>Continuar →</button>
+          </div>
+        </div>
+      </section>
+      <section class="tp-result" id="tp-result" aria-live="polite">
+        <div class="tp-result-top"><span class="tp-result-mark" aria-hidden="true">✓</span> Tu orientación está lista</div>
+        <h2 id="tp-result-title">Tu mejor punto de partida</h2>
+        <p class="tp-question-sub" id="tp-result-sub"></p>
+        <div class="tp-result-panel">
+          <div class="tp-result-program" id="tp-result-program"></div>
+          <h2 id="tp-result-name"></h2>
+          <p id="tp-result-desc"></p>
+          <div class="tp-evidence" aria-label="Señales que hemos tenido en cuenta">
+            <article class="tp-evidence-card"><span>Tu prioridad</span><strong id="tp-evidence-goal-title"></strong><p id="tp-evidence-goal"></p></article>
+            <article class="tp-evidence-card"><span>Tu forma de abordar retos</span><strong id="tp-evidence-approach-title"></strong><p id="tp-evidence-approach"></p></article>
+            <article class="tp-evidence-card"><span>Tu punto de partida</span><strong id="tp-evidence-start-title"></strong><p id="tp-evidence-start"></p></article>
+          </div>
+          <div class="tp-reason"><strong>Cómo se conectan estas señales con la ruta</strong><p id="tp-result-reason"></p></div>
+          <div class="tp-reason tp-alternative" id="tp-alt-wrap" hidden><strong>Otra ruta que podrías valorar</strong><p id="tp-result-alt"></p></div>
+          <div class="tp-result-actions"><a class="tp-button" id="tp-program-cta" target="_blank" rel="noopener">Ver el programa →</a><a class="tp-button secondary" id="tp-dossier-cta" target="_blank" rel="noopener">Descargar dossier →</a><a class="tp-button secondary" id="tp-booking-cta" target="_blank" rel="noopener" hidden>Pedir cita en PowerCalendar →</a><button class="tp-button secondary" id="tp-restart" type="button">Hacer otra orientación</button></div>
+          <label class="tp-consent"><input type="checkbox" id="tp-email-consent"><span>Quiero recibir por email mi resumen personalizado y novedades relacionadas. Puedo darme de baja cuando quiera.</span></label>
+          <div class="tp-email-wrap" id="tp-email-wrap" hidden><label for="tp-email">Email para enviarte el resumen</label><input class="tp-email" id="tp-email" type="email" autocomplete="email" placeholder="tu@email.com"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script>
+    (() => {
+      const root = document.getElementById('thepower-orientador');
+      const questions = [
+        {type:'Tu situación', title:'¿Qué te gustaría que fuera distinto en tu trabajo o trayectoria dentro de un año?', sub:'Cuéntanos qué te gustaría lograr. No hace falta conocer programas ni tecnologías.', open:true, placeholder:'Me gustaría…'},
+        {type:'Un caso real', title:'¿Hay una tarea, dificultad o idea que te gustaría abordar?', sub:'Describe qué ocurre hoy, a quién afecta y qué te gustaría que pasara.', open:true, placeholder:'Ahora mismo… Me gustaría poder…'},
+        {type:'Contexto', title:'¿En qué situación esperas aplicar lo que aprendas?', sub:'Elige la que más se acerque; puedes ampliar tu respuesta al final.', options:[
+          {label:'En mi trabajo actual, dentro de mis responsabilidades habituales', score:{makers:1,data:1}},
+          {label:'En proyectos digitales o tecnológicos en los que ya participo', score:{rock:1,agentic:1,engineer:1}},
+          {label:'En un cambio de puesto, sector o trayectoria profesional', score:{rock:1,data:1}},
+          {label:'Todavía estoy explorando opciones', score:{makers:1,rock:1,data:1}}
+        ]},
+        {type:'Resultado que buscas', title:'¿Qué cambio te gustaría notar primero al aplicar lo que aprendas?', sub:'Piensa en el efecto concreto que tendría más valor en tu día a día.', options:[
+          {label:'Dedicar menos tiempo a tareas manuales y repetitivas', score:{makers:2}},
+          {label:'Tomar decisiones con más claridad a partir de datos', score:{data:2}},
+          {label:'Convertir una idea en un producto digital que se pueda usar', score:{rock:2}},
+          {label:'Conectar herramientas para que un proceso funcione mejor de principio a fin', score:{makers:1,agentic:1,engineer:1}}
+        ]},
+        {type:'Experiencia práctica', title:'¿Con qué actividades has tenido contacto hasta ahora?', sub:'Puedes elegir varias, aunque tu experiencia haya sido pequeña.', multi:true, options:[
+          {label:'Automatizar tareas o conectar pasos de un proceso', score:{makers:1}},
+          {label:'Analizar datos, preparar consultas o revisar informes', score:{data:1}},
+          {label:'Crear o modificar scripts, webs o aplicaciones', score:{rock:1,agentic:1}},
+          {label:'Conectar servicios, APIs o bases de datos', score:{agentic:1,engineer:1}},
+          {label:'Publicar o mantener una aplicación en un entorno cloud', score:{engineer:1,agentic:1}},
+          {label:'Todavía no he trabajado con estas actividades', score:{}, none:true}
+        ]},
+        {type:'Punto de partida', title:'¿Cuál describe mejor tu experiencia creando soluciones digitales?', sub:'Nos interesa lo que has probado o construido, no el título de tu puesto.', options:[
+          {label:'Estoy empezando; todavía no he creado una solución propia', score:{makers:1,rock:1,data:1}, level:'none'},
+          {label:'He configurado herramientas o montado prototipos sencillos', score:{makers:1,rock:2,data:1}, level:'basic'},
+          {label:'He escrito código o integrado herramientas en un proyecto', score:{rock:1,agentic:2,engineer:2}, level:'coding'},
+          {label:'He desplegado y mantenido aplicaciones o servicios', score:{engineer:3,agentic:2}, level:'production'}
+        ]},
+        {type:'Tu manera de trabajar', title:'Cuando afrontas un reto nuevo, ¿qué parte te resulta más atractiva?', sub:'No hace falta tener experiencia en todas estas tareas; elige la que más curiosidad te da.', options:[
+          {label:'Entender la necesidad y decidir qué merece la pena resolver', score:{makers:2}},
+          {label:'Buscar patrones y convertirlos en una explicación útil', score:{data:2}},
+          {label:'Diseñar y construir una experiencia digital de principio a fin', score:{rock:2}},
+          {label:'Conectar componentes para que un sistema funcione de forma fiable', score:{agentic:1,engineer:2}}
+        ]},
+        {type:'Forma de aprender', title:'¿Qué tipo de estructura te ayuda a avanzar?', sub:'No hay una opción mejor; queremos saber qué formato te resultará sostenible.', options:[
+          {label:'Fechas, sesiones compartidas y acompañamiento frecuente', score:{makers:2,engineer:2,agentic:1}, mode:'live'},
+          {label:'Flexibilidad para estudiar en los huecos que tenga', score:{rock:2,data:2}, mode:'flexible'},
+          {label:'Una mezcla de estructura y trabajo a mi ritmo', score:{makers:1,rock:1,agentic:1,engineer:1,data:1}, mode:'mixed'}
+        ]},
+        {type:'Disponibilidad', title:'¿Cuánto tiempo puedes reservar de forma realista cada semana?', sub:'Piensa en una semana normal, no en una semana ideal.', options:[
+          {label:'Unos pocos bloques cortos, con horarios variables', score:{rock:1,data:1}, hours:'low'},
+          {label:'Varias horas, con cierta regularidad', score:{makers:1,rock:1,data:1,agentic:1,engineer:1}, hours:'steady'},
+          {label:'Bloques fijos y tiempo amplio para un proyecto exigente', score:{makers:1,agentic:1,engineer:1}, hours:'high'}
+        ]},
+        {type:'Cómo medir el progreso', title:'Al terminar, ¿qué te gustaría poder enseñar o contar?', sub:'Una respuesta breve nos ayuda a entender qué resultado tendría valor para ti.', open:true, placeholder:'Me gustaría poder mostrar o explicar…'},
+        {type:'Titulación universitaria', title:'¿Es importante para ti obtener también una titulación universitaria?', sub:'Todos los programas Intensive permiten añadir una titulación universitaria como complemento. Si te interesa, lo tendremos en cuenta al recomendarte una ruta.', options:[
+          {label:'Sí, quiero incluir esa opción en mi recomendación'},
+          {label:'No, no es un factor decisivo para mí'}
+        ]}
+      ];
+      const programs = {
+        makers:{name:'Intensive Makers', universityLabel:'Intensive Makers + Programa Universitario', desc:'Para detectar oportunidades de IA en un área de negocio y construir soluciones prácticas sin programar.', link:'https://thepower.education/thepowermba/intensive-makers', dossier:'https://thepower.education/forms/inmk-es-mql-dossier?previoussource=', appointment:'https://powercalendar.tools.thepower.education/orientacion?programId=intensive-makers', fit:'Te permite partir de una necesidad del negocio, valorar su impacto y construir una solución con IA sin depender de programación.'},
+        rock:{name:'Rock The AI Code', desc:'Para aprender a desarrollar productos digitales full stack con IA como copiloto y construir un portfolio de proyectos.', link:'https://thepower.education/thepowermba/tech/rock-the-code', dossier:'https://thepower.education/forms/rtc-es-mql-pdf?previoussource=', appointment:'https://powercalendar.tools.thepower.education/orientacion?programId=rock-the-ai-code', fit:'Encaja con el interés por transformar una idea en un producto digital completo y aprender a desarrollar guiando a la IA.'},
+        agentic:{name:'AI Agentic Developer', universityLabel:'Intensive Master - Agentic AI Developer + Programa Universitario', desc:'Para construir y desplegar sistemas agénticos, con una base técnica que permita trabajar con código y herramientas de desarrollo.', link:'https://thepower.education/thepowermba/tech/ai-agentic-developer', dossier:'https://thepower.education/forms/datp-es-desarrollador-agentico-mql-dossier?previoussource=', appointment:'https://powercalendar.tools.thepower.education/orientacion?programId=intensive-agentic-ai-developer', fit:'Se centra en diseñar cómo colaboran los agentes, conectarlos con herramientas y desplegar flujos que puedan operar con trazabilidad.'},
+        engineer:{name:'AI Engineer', universityLabel:'Intensive AI Engineer + Programa Universitario', desc:'Para profundizar en el diseño e integración de sistemas de IA preparados para funcionar en producción.', link:'https://thepower.education/thepowermba/tech/ai-engineer', dossier:'https://thepower.education/forms/tpie-es-aiengineer-mql-dossier?previoussource=', appointment:'https://powercalendar.tools.thepower.education/orientacion?programId=intensive-ai-engineer', fit:'Profundiza en arquitectura, evaluación, integración y operación de sistemas de IA fiables en producción.'},
+        data:{name:'AI Data Analytics', universityLabel:'Intensive Master - AI Data Analytics + Programa Universitario', desc:'Para convertir datos en decisiones y elegir después entre una ruta de Business Intelligence o Analytics Engineering.', link:'https://thepower.education/thepowermba/tech/data-analytics', dossier:'https://thepower.education/forms/tpda-es-mql-dossier?previoussource=', appointment:'https://powercalendar.tools.thepower.education/orientacion?programId=intensive-ai-data-analytics', fit:'Parte de preguntas y datos reales para construir análisis que ayuden a explicar patrones y orientar decisiones.'}
+      };
+      const intro = root.querySelector('#tp-intro');
+      const introDetails = root.querySelector('#tp-intro-details');
+      const quiz = root.querySelector('#tp-quiz');
+      const result = root.querySelector('#tp-result');
+      const optionsBox = root.querySelector('#tp-options');
+      const next = root.querySelector('#tp-next');
+      const answers = Array(questions.length).fill(null);
+      let step = 0;
+      let resultProgram = 'makers';
+      const openAnswer = root.querySelector('#tp-open-answer');
+
+      function saveState() {
+        if (window.openai && typeof window.openai.setWidgetState === 'function') {
+          window.openai.setWidgetState({modelContent:{version:4,step, answers:answers.map((answer,index) => questions[index].open ? null : answer)}, privateContent:{openAnswer:openAnswer.value}}).catch(() => {});
+        }
+      }
+      function renderQuestion() {
+        const q = questions[step];
+        root.querySelector('#tp-step-label').textContent = `Pregunta ${step + 1} de ${questions.length}`;
+        root.querySelector('#tp-time-label').textContent = `~${Math.max(1, Math.ceil((questions.length - step - 1) * .8))} min restantes`;
+        root.querySelector('#tp-progress-bar').style.width = `${((step + 1) / questions.length) * 100}%`;
+        root.querySelector('.tp-progress').setAttribute('aria-valuenow', String(step));
+        root.querySelector('#tp-question-type').textContent = q.type;
+        root.querySelector('#tp-question-title').textContent = q.title;
+        root.querySelector('#tp-question-sub').textContent = q.sub;
+        root.querySelector('#tp-open-wrap').hidden = !q.open;
+        root.querySelector('#tp-open-label').textContent = q.open ? 'Tu respuesta' : 'Tu respuesta nos ayuda a afinar la orientación';
+        optionsBox.innerHTML = '';
+        optionsBox.hidden = !!q.open;
+        if (q.open) {
+          next.disabled = false;
+          next.textContent = step === questions.length - 1 ? 'Ver mi recomendación →' : 'Continuar →';
+          openAnswer.value = answers[step] || '';
+          openAnswer.placeholder = q.placeholder || 'Escribe tu respuesta aquí…';
+        } else {
+          if (q.multi && !Array.isArray(answers[step])) answers[step] = [];
+          q.options.forEach((option, index) => {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = `tp-option${q.multi ? ' is-multi' : ''}`;
+            const selected = q.multi ? answers[step].includes(index) : answers[step] === index;
+            button.setAttribute('aria-pressed', String(selected));
+            button.innerHTML = `<span class="tp-radio" aria-hidden="true"></span><span class="tp-option-copy"><span>${option.label}</span>${option.detail ? `<small>${option.detail}</small>` : ''}</span>`;
+            button.addEventListener('click', () => {
+              if (q.multi) {
+                const current = new Set(answers[step]);
+                if (current.has(index)) current.delete(index);
+                else if (option.none) { current.clear(); current.add(index); }
+                else { current.delete(q.options.findIndex(item => item.none)); current.add(index); }
+                answers[step] = [...current].filter(i => i >= 0);
+                optionsBox.querySelectorAll('.tp-option').forEach((el, i) => el.setAttribute('aria-pressed', String(answers[step].includes(i))));
+                next.disabled = answers[step].length === 0;
+              } else {
+                answers[step] = index;
+                optionsBox.querySelectorAll('.tp-option').forEach((el, i) => el.setAttribute('aria-pressed', String(i === index)));
+                next.disabled = false;
+              }
+              saveState();
+            });
+            optionsBox.appendChild(button);
+          });
+          next.disabled = q.multi ? answers[step].length === 0 : answers[step] === null;
+          next.textContent = step === questions.length - 1 ? 'Ver mi recomendación →' : 'Continuar →';
+        }
+        root.querySelector('#tp-back').style.visibility = step === 0 ? 'hidden' : 'visible';
+      }
+      function computeRecommendation() {
+        const score = {makers:0,rock:0,agentic:0,engineer:0,data:0};
+        const levels = [];
+        questions.forEach((q, index) => {
+          if (q.open || answers[index] === null) return;
+          const indices = q.multi ? answers[index] : [answers[index]];
+          indices.forEach(optionIndex => {
+            const chosen = q.options[optionIndex];
+            if (!chosen) return;
+            Object.entries(chosen.score || {}).forEach(([key,value]) => score[key] += value);
+            if (chosen.level) levels.push(chosen.level);
+          });
+        });
+        const story = [answers[0], answers[1], answers[9]].filter(value => typeof value === 'string').join(' ').toLowerCase();
+        if (/automat|proceso|operativ|ahorr|repetitiv/.test(story)) score.makers += 2;
+        if (/dato|sql|analisis|análisis|informe|report|metric|dashboard|kpi/.test(story)) score.data += 2;
+        if (/web|aplicaci|software|saas|desarroll|program|codigo|código|producto digital/.test(story)) score.rock += 2;
+        if (/agent|agente|orquest|mcp|herramientas conectad/.test(story)) score.agentic += 2;
+        if (/produccion|producción|cloud|desplieg|arquitect|integracion|integración|api/.test(story)) score.engineer += 2;
+        const level = levels.at(-1) || 'none';
+        if (level === 'none') { score.agentic -= 5; score.engineer -= 6; }
+        if (level === 'basic') { score.engineer -= 3; score.agentic -= 2; }
+        const wantsUniversity = answers[10] === 0;
+        const ranked = Object.entries(score).filter(([key]) => !wantsUniversity || programs[key].universityLabel).sort((a,b) => b[1] - a[1]);
+        let primary = ranked[0][0];
+        let secondary = ranked[1][0];
+        if ((primary === 'engineer' || primary === 'agentic') && (level === 'none' || level === 'basic')) {
+          primary = wantsUniversity ? 'makers' : 'rock';
+          secondary = null;
+        }
+        if (secondary && ranked[0][1] - ranked[1][1] >= 3) secondary = null;
+        return {primary, secondary, level, wantsUniversity};
+      }
+      function showResult() {
+        const {primary, secondary, level: levelCode, wantsUniversity} = computeRecommendation();
+        resultProgram = primary;
+        const p = programs[primary];
+        const s = secondary ? programs[secondary] : null;
+        const clean = value => typeof value === 'string' ? value.trim() : '';
+        const shortQuote = value => { const text = clean(value); return text ? `“${text.slice(0, 120)}${text.length > 120 ? '…' : ''}”` : ''; };
+        const priority = questions[3].options[answers[3]]?.label || '';
+        const approach = questions[6].options[answers[6]]?.label || '';
+        const experience = questions[5].options[answers[5]]?.label || 'tu punto de partida';
+        const learning = questions[7].options[answers[7]]?.label || '';
+        const time = questions[8].options[answers[8]]?.label || '';
+        const activities = Array.isArray(answers[4]) ? answers[4].map(index => questions[4].options[index]?.label).filter(Boolean) : [];
+        const objective = clean(answers[0]);
+        const challenge = clean(answers[1]);
+        const proof = clean(answers[9]);
+        root.querySelector('#tp-result-name').textContent = wantsUniversity ? p.universityLabel : p.name;
+        root.querySelector('#tp-result-program').textContent = 'Ruta recomendada';
+        root.querySelector('#tp-result-sub').textContent = wantsUniversity ? 'La recomendación recoge tus objetivos, el reto que planteas, tu experiencia y tus preferencias, incluida la opción de sumar una titulación universitaria.' : 'La recomendación recoge tus objetivos, el reto que planteas, tu experiencia y las condiciones en las que quieres formarte.';
+        root.querySelector('#tp-result-desc').textContent = p.desc;
+        root.querySelector('#tp-evidence-goal-title').textContent = priority || 'El resultado que buscas';
+        root.querySelector('#tp-evidence-goal').textContent = objective ? `En tu objetivo a un año: ${shortQuote(objective)}${challenge ? ` El caso que quieres abordar es ${shortQuote(challenge)}.` : ''}` : challenge ? `El reto que quieres abordar es ${shortQuote(challenge)}.` : 'Hemos usado el cambio que has priorizado para orientar la recomendación.';
+        root.querySelector('#tp-evidence-approach-title').textContent = approach || 'Tu estilo de trabajo';
+        root.querySelector('#tp-evidence-approach').textContent = activities.length ? `También has tenido contacto con ${activities.slice(0, 2).join(' y ').toLowerCase()}${activities.length > 2 ? ` y ${activities.length - 2} actividad${activities.length > 2 ? 'es' : ''} más` : ''}.` : 'Tu preferencia nos ayuda a distinguir qué tipo de proyecto puede mantener tu interés.';
+        root.querySelector('#tp-evidence-start-title').textContent = experience;
+        root.querySelector('#tp-evidence-start').textContent = [learning ? `Te ayuda avanzar con: ${learning.toLowerCase()}.` : '', time ? `Tiempo disponible: ${time.toLowerCase()}.` : '', wantsUniversity ? 'También es importante para ti sumar una titulación universitaria.' : '', proof ? `Al terminar quieres poder enseñar ${shortQuote(proof)}.` : ''].filter(Boolean).join(' ');
+        let why = `${priority ? `Has puesto el foco en ${priority.toLowerCase()}` : 'Tu prioridad profesional'} y te atrae ${approach ? approach.toLowerCase() : 'el tipo de retos de esta ruta'}. ${p.fit}`;
+        if (challenge) why += ` El ejemplo que describes —${shortQuote(challenge)}— da contexto a esa elección.`;
+        why += ` Hemos contrastado ese objetivo con tu experiencia (${experience.toLowerCase()})`;
+        if (learning) why += `, tu preferencia por ${learning.toLowerCase()}`;
+        if (time) why += ` y el tiempo que puedes reservar (${time.toLowerCase()})`;
+        why += '. Así la sugerencia conecta lo que quieres conseguir con el tipo de trabajo y el ritmo de aprendizaje del programa.';
+        if ((primary === 'engineer' || primary === 'agentic') && levelCode !== 'coding' && levelCode !== 'production') why += ' Antes de matricularte, conviene confirmar los requisitos técnicos de entrada con el equipo académico.';
+        if (wantsUniversity) why += ' Como has indicado que la titulación universitaria es importante para ti, hemos priorizado esta ruta Intensive, que permite añadirla al programa.';
+        if (proof) why += ` El resultado que quieres demostrar es ${shortQuote(proof)}.`;
+        root.querySelector('#tp-result-reason').textContent = why;
+        root.querySelector('#tp-program-cta').href = p.link;
+        root.querySelector('#tp-dossier-cta').href = p.dossier;
+        const bookingCta = root.querySelector('#tp-booking-cta');
+        if (p.appointment) { bookingCta.href = p.appointment; bookingCta.hidden = false; }
+        else bookingCta.hidden = true;
+        const altWrap = root.querySelector('#tp-alt-wrap');
+        altWrap.hidden = !s || s.name === p.name;
+        root.querySelector('#tp-result-alt').textContent = s ? `${s.name}: ${s.desc}` : '';
+        intro.style.display = 'none'; introDetails.style.display = 'none'; quiz.style.display = 'none'; result.style.display = 'block';
+        saveState();
+      }
+      root.querySelector('#tp-start').addEventListener('click', () => { intro.style.display='none'; introDetails.style.display='none'; quiz.style.display='block'; renderQuestion(); });
+      next.addEventListener('click', () => {
+        if (questions[step].open) answers[step] = openAnswer.value.trim();
+        if (step < questions.length - 1) { step += 1; renderQuestion(); saveState(); }
+        else showResult();
+      });
+      root.querySelector('#tp-back').addEventListener('click', () => { if (step > 0) { step -= 1; renderQuestion(); saveState(); } });
+      root.querySelector('#tp-restart').addEventListener('click', () => {
+        answers.fill(null); step=0; openAnswer.value=''; result.style.display='none'; intro.style.display='grid'; introDetails.style.display='block'; saveState();
+      });
+      openAnswer.addEventListener('input', () => { answers[step] = openAnswer.value; saveState(); });
+      root.querySelector('#tp-email-consent').addEventListener('change', event => { root.querySelector('#tp-email-wrap').hidden = !event.target.checked; });
+      const saved = window.openai && window.openai.widgetState;
+      if (saved && saved.modelContent && saved.modelContent.version === 4 && Array.isArray(saved.modelContent.answers)) {
+        saved.modelContent.answers.forEach((answer,index) => { if (index < questions.length && !questions[index].open) answers[index] = answer; });
+        step = Math.max(0, Math.min(questions.length - 1, Number(saved.modelContent.step) || 0));
+        if (saved.privateContent && typeof saved.privateContent.openAnswer === 'string') openAnswer.value = saved.privateContent.openAnswer;
+        if (step > 0) { intro.style.display='none'; introDetails.style.display='none'; quiz.style.display='block'; renderQuestion(); }
+      }
+    })();
+  </script>
+</div>
+</body></html>
